@@ -1,0 +1,65 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-09 21:26:07
+ * @LastEditTime: 2021-04-10 13:29:33
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.x\Demo15-模板样式绑定(2).html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({ // App  Application 
+        data() {
+            return {
+                //通过普通字符串进行绑定
+                classString:'pink',
+                //通过对象的方式进行绑定
+                classObject:{pink:true,background:true},
+                //通过数组的方式进行绑定   可以在里面嵌套对象
+                classArray:['skyblue','background',/*{pink:true}*/],
+                styleString:'color:orange', //将css样式写成字符串的形式
+                styleObject:{  //将css样式写成对象的形式
+                    color:'red',
+                    background:'pink'
+                }
+            }
+        },
+        template:`
+            <h2 :style="styleObject">jspang.com</h2>
+            <sonCom class="skyblue" />
+        `
+    })
+    app.component('sonCom',{
+        template:`
+            <div>
+                <div>SonCom</div>
+                <div>技术胖</div>
+            </div>
+        `
+    })
+    const vm = app.mount("#app")
+</script>
+<style>
+    .pink {
+        color:pink
+        !important;  /*提高 pink颜色优先级 */
+    }
+    .skyblue {
+        color:skyblue;
+    }
+    .background {
+        background-color: orange;
+    }
+</style>
+</html>

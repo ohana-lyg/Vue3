@@ -1,0 +1,61 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-10 20:39:33
+ * @LastEditTime: 2021-04-10 21:05:05
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.x第二季\Demo4.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+
+    const app = Vue.createApp({   
+        data() {
+            return {
+                cname:"技术胖",
+                pay:()=>{
+                    alert('给你666')
+                }
+            }
+        },
+        template:`
+            <h2>jspang.com</h2>
+            <son :cname="cname" />
+        `
+    })
+    app.component('son',{
+        //类型的校验 支持的类型：String、Boolean、Array、Object、Function、Symbol
+        
+        /*props:{
+            cname:String  //不是字符串，给出警告
+        },*/
+        props:{
+            cname:{
+                type:String,  //要求是字符串，不是，给出警告
+                //required:true //cname属性必须填写，不传值给出警告
+                default:'jspang.com', //默认值
+                //精准判断 传的值是否有jspang,没有给出警告
+                 validator:function(value) {
+                     return value.search("jspang") != -1  //返回的时布尔类型
+                 }
+            }
+        },
+        template:`
+            <div>{{cname}} div</div>
+        `
+    })
+
+    const vm = app.mount("#app")
+</script>
+</html>

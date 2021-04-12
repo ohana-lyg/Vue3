@@ -1,0 +1,60 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-11 20:32:20
+ * @LastEditTime: 2021-04-11 21:24:14
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.x第二季\Demo11.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                pictureshow:'shenteng'
+            }
+        },
+        methods:{
+            handleClick() {
+                this.pictureshow = this.pictureshow ==  'diaocan' ? 'guaidaojide' : 'diaocan'
+            }
+        },
+        //<component :is="pictureshow"/>  动态组件  数据项pictureshow的值决定展示对应组件
+        template: ` 
+            <h2>欢迎光临红浪漫-请选择您的技师</h2>
+            <keep-alive>
+                <component :is="pictureshow"/>
+            </keep-alive>
+            <div><button @click="handleClick">切换</button></div>
+        `
+    })
+    app.component('shenteng',{
+        template:`<img src="https://img2.baidu.com/it/u=1146823620,872883905&fm=26&fmt=auto&gp=0.jpg" width="300" />`
+    })
+    app.component('diaocan',{
+        template:`<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201710%2F08%2F20171008221134_tFAiM.thumb.400_0.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620737126&t=d61d97b23273f6cf305a2bd173260823" width="300" />`
+        //template:`<input />`
+    })
+
+    app.component('guaidaojide',{
+        template:`<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fgss0.baidu.com%2F-Po3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2F4afbfbedab64034f73f2164ba6c379310a551dbb.jpg&refer=http%3A%2F%2Fgss0.baidu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620737437&t=c0ea350dc93defffedc686106094a3ce" width="300" />`
+    })
+    
+    //沈腾：https://img2.baidu.com/it/u=1146823620,872883905&fm=26&fmt=auto&gp=0.jpg
+    //貂蝉：https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201710%2F08%2F20171008221134_tFAiM.thumb.400_0.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620737126&t=d61d97b23273f6cf305a2bd173260823
+    //怪盗基德：https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fgss0.baidu.com%2F-Po3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2F4afbfbedab64034f73f2164ba6c379310a551dbb.jpg&refer=http%3A%2F%2Fgss0.baidu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620737437&t=c0ea350dc93defffedc686106094a3ce
+
+    const vm = app.mount("#app")
+</script>
+</html>

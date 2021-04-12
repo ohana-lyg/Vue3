@@ -1,0 +1,52 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-09 20:56:34
+ * @LastEditTime: 2021-04-09 21:25:14
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.x\Demo14-模板样式绑定(1).html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({ // App  Application 
+        data() {
+            return {
+                //通过普通字符串进行绑定
+                classString:'pink',
+                //通过对象的方式进行绑定
+                classObject:{pink:true,background:true},
+                //通过数组的方式进行绑定   可以在里面嵌套对象
+                classArray:['skyblue','background',/*{pink:true}*/]
+            }
+        },
+        template:`
+            <h2 :class="classArray">jspang.com</h2>
+        `
+    })
+    const vm = app.mount("#app")
+
+</script>
+<style>
+    .pink {
+        color:pink
+        !important;  /*提高 pink颜色优先级 */
+    }
+    .skyblue {
+        color:skyblue;
+    }
+    .background {
+        background-color: orange;
+    }
+</style>
+</html>

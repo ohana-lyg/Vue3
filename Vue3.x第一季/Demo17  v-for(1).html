@@ -1,0 +1,57 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-10 13:44:03
+ * @LastEditTime: 2021-04-10 14:27:40
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.x\Demo17  v-for(1).html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app=Vue.createApp({ 
+        data(){
+            return{   
+                listArray:['西施','貂蝉','王昭君','杨玉环'],
+                /*listObject:{
+                    GirlOne:'西施',
+                    GirlTwo:'貂蝉',
+                    GirlThree:'王昭君',
+                    Girlfour:'杨玉环'
+                }*/
+            }
+        },
+        methods:{
+            handleChangeBtnClick() {
+                this.listArray.push('技术胖')
+            },
+        },
+        //绑定key值的使用方法，目的就是增加渲染性能，只渲染新变化的内容，避免重复渲染
+        template:`
+            <ul>
+                <li v-for="(item,index)  in listArray">[{{index}}]{{item}}</li>
+            </ul>
+            <button @click="handleChangeBtnClick">点击改变</button>
+        `
+        //循环对象
+        /*template:`
+            <ul>
+                <li v-for="(value,key,index) in listObject":key="key">[{{index}}]{{value}}-{{key}}</li>    
+            </ul>
+            <button @click="handleChangeBtnClick">点击改变</button>
+        `*/
+
+    }) 
+    const vm=app.mount("#app")
+</script>
+</html>

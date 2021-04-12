@@ -1,0 +1,48 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-09 13:48:46
+ * @LastEditTime: 2021-04-09 14:28:19
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.x\Demo4.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    Vue.createApp({ //创建一个Vue实例
+        data(){
+            return{
+                list:[],
+                inputValue:''
+            }
+        },
+        methods:{
+            handleAdditem(){
+                this.list.push(this.inputValue)
+                this.inputValue=''
+            }
+        },
+        //v-model 数据双向绑定
+        //v-for 循环
+        template:`
+            <div>
+                <input v-model="inputValue" />
+                <button v-on:click="handleAdditem">增加佳丽</button>
+                <ul>
+                    <li v-for="(item,index) of list">[{{index}}]-{{item}}</li>
+                </ul>
+            </div>
+        `
+    }).mount("#app")
+</script>
+</html>

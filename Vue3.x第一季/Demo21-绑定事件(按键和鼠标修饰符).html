@@ -1,0 +1,47 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-10 15:33:05
+ * @LastEditTime: 2021-04-10 15:44:07
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.x\Demo21-绑定事件(按键和鼠标修饰符).html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app=Vue.createApp({ 
+    data(){
+        return{}
+    },
+    methods:{
+        handlekeydown() {
+            console.log('KeyDown...');
+        },
+        handleClick() {
+            alert('666')
+        }
+    },
+    //按键修饰符  enter 、tab、delete、esc、up 、down、left、right
+    //鼠标修饰符  lfet \ right \ middle
+    template:`
+        <div>
+            <input @keydown.enter="handlekeydown"/>
+            <div @click.right="handleClick">jspang.com</div>
+        </div>
+        ` 
+    }) 
+    const vm=app.mount("#app")
+
+</script>
+
+</html>

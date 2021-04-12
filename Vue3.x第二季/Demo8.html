@@ -1,0 +1,58 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-11 15:45:31
+ * @LastEditTime: 2021-04-11 16:08:14
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.x第二季\Demo8.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                jishi:"西施"
+            }
+        },
+        template: ` 
+            <h2>欢迎光临红浪漫-请选择您的技师</h2>
+            <JiShi>
+                <div style="color:red;font-size:50px;">{{jishi}}</div>
+                <div><project /></div>  
+            </JiShi>
+        `
+    })
+    app.component('JiShi',{
+        data() {
+            return {
+                jishi:"貂蝉"
+            }
+        },
+        template:`
+            <div>
+                <span>经过您的慎重考虑，最终选择了.</span>
+                <span>
+                    <slot></slot>
+                </span>
+            </div>  
+        `
+    })
+    app.component('project', {
+        template: `<span style="color:blue;font-size:50px;">四大美女，任你选择</span>`
+    })
+
+    const vm = app.mount("#app")
+</script>
+
+</html>

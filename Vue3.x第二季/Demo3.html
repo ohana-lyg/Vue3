@@ -1,0 +1,57 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-10 20:06:15
+ * @LastEditTime: 2021-04-10 20:46:14
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.x第二季\Demo3.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+
+    const app = Vue.createApp({   
+        data() {
+            return {
+                cname:"技术胖",
+                pay:()=>{
+                    alert('给你666')
+                }
+            }
+        },
+        template:`
+            <h2>jspang.com</h2>
+            <son :cname="cname" />
+            <girl :pay="pay"/>
+        `
+    })
+    app.component('son',{
+        props:['cname'],
+        template:`
+            <div>{{cname}} div</div>
+        `
+    })
+    app.component('girl',{
+        props:['pay'],
+        methods:{
+            handleClick() {
+                alert('请付钱...')
+                this.pay()
+            }
+        },
+        template:`<div @click="handleClick">和小姐姐打招呼</div>`
+    })
+    //静态传参传递的只能是字符串类型String，而动态传参的就可以是多种类型了，甚至是一个函数(方法)
+    const vm = app.mount("#app")
+</script>
+</html>

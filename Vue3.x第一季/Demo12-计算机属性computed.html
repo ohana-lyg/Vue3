@@ -1,0 +1,56 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-09 20:54:13
+ * @LastEditTime: 2021-04-09 20:54:24
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.x\Demo12-计算机属性computed.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({ // App  Application 
+        data(){
+            return{
+               message:'bilibili',
+               price:10,
+               count:2
+            }
+        },
+        computed:{   //计算属性computed: 当计算属性依赖的内容发生变更时，才会重新执行计算
+            total() {
+                return this.price * this.count
+            }
+        },
+        methods:{   //方法methods：只要页面重新渲染，就会重新执行方法
+            handleitemClick() {
+                this.message = this.message == 'jspang.com'?'技术胖':'jspang.com'
+            },
+            getTotal() {
+                return Date.now()  //获得当前时间戳
+            },
+            addCount() {
+                this.count++
+            }
+        },
+        template:`
+            <h2>{{message}}</h2>
+            <h2>总和：{{total}}</h2>
+            <h2>当前时间戳：{{getTotal()}}</h2>
+            <button @click="addCount">再来一次</button>
+        `
+    })
+    const vm = app.mount("#app")
+
+</script>
+</html>

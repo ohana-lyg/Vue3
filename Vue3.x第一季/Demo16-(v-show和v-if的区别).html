@@ -1,0 +1,36 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-10 13:28:45
+ * @LastEditTime: 2021-04-10 13:42:18
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.x\Demo16-(v-show和v-if的区别).html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({ // App  Application 
+        data() {
+            return {
+                show:false
+            }
+        },
+        //v-show控制DOM元素显示，其实控制的是css样式，也就是display:noe
+        template:`
+            <h2 v-show="show">jspang.com</h2>
+            <h2 v-if="show">技术胖</h2>
+        `
+    })
+    const vm = app.mount("#app")
+</script>
+</html>

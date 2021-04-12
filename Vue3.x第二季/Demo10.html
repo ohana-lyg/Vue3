@@ -1,0 +1,63 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-11 20:03:28
+ * @LastEditTime: 2021-04-11 20:38:12
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.x第二季\Demo10.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                jishi:'西施'
+            }
+        },
+        //v-slot:one == #one  slot：插槽
+
+        /*
+        //es6解构方式
+        template: ` 
+            <h2>欢迎光临红浪漫-请选择您的技师</h2>
+            <List v-slot="{item}">         
+                <span>{{item}}</span>    
+            </List>
+        `
+        */
+       //这里的props接受的的数据是对象   西施-{ "item": "西施" } 貂蝉-{ "item": "貂蝉" } 王昭君-{ "item": "王昭君" } 杨玉环-{ "item": "杨玉环" }
+        template: ` 
+            <h2>欢迎光临红浪漫-请选择您的技师</h2>
+            <List v-slot="props">
+                <span>{{props.item}}</span>    
+            </List>
+        `
+    })
+    app.component('List',{
+        data() {
+            return {
+                list:['西施','貂蝉','王昭君','杨玉环']
+            }
+        },
+        template:`
+            <div>
+                <slot v-for="item in list" :item="item" />
+            </div>
+        `
+    })
+    //<div v-for="item in list">{{item}}</div>
+
+    const vm = app.mount("#app")
+</script>
+</html>

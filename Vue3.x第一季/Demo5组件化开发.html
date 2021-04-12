@@ -1,0 +1,61 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-09 14:13:32
+ * @LastEditTime: 2021-04-09 14:31:50
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.x\Demo5.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({ //创建一个Vue实例
+        data(){
+            return{
+                list:[],
+                inputValue:''
+            }
+        },
+        methods:{
+            handleAdditem(){
+                this.list.push(this.inputValue)
+                this.inputValue=''
+            }
+        },
+        //v-model 数据双向绑定
+        //v-for 循环
+        template:`
+            <div>
+                <my-title />
+                <input v-model="inputValue" />
+                <button v-on:click="handleAdditem">增加佳丽</button>
+                <ul>
+                    <my-glade 
+                       v-for="(item,index) of list" 
+                       v-bind:item="item"
+                       v-bind:index="index"
+                    />
+                </ul>
+            </div>
+        `
+    })
+    app.component('my-title',{
+        template:'<h1 style="text-align:center">象牙山洗脚城</h1>'
+    })
+    app.component('my-glade',{
+        props:['index','item'],
+        template:`<li>[{{index}}]-{{item}}</li>`
+    })
+    app.mount("#app")
+</script>
+</html>

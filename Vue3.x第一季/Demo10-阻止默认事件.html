@@ -1,0 +1,57 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-09 20:52:08
+ * @LastEditTime: 2021-04-09 20:52:09
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.x\Demo10-阻止默认事件.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({ //Application 
+        data(){
+            return{
+               message:'jspang.com', 
+               name:'title',
+               event:'click'
+            }
+        },
+        methods:{
+            handleitemClick(){
+                alert('666')
+                //this.message = this.message == 'jspang.com'?'技术胖':'jspang.com'
+            },
+            handleButton(e){
+                alert('技术胖')
+            }
+        },
+        template:`
+            <h2 
+                :[name]="message"
+                @[event]="handleitemClick"
+            >
+            {{message}}</h2>
+            <form action="https://jspang.com" @click.prevent="handleButton">
+                <button type="submit">submit</button>
+            </form>
+        `
+        //prevent 阻止默认事件
+        //form 默认表单事件
+        //v-on:click="handleitemClick" == @click="handleitemClick"
+        //v-bind:title="message" == :title="message"
+    })
+    const vm = app.mount("#app")
+
+</script>
+</html>

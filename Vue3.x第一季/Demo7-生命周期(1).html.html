@@ -1,0 +1,51 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-09 15:45:56
+ * @LastEditTime: 2021-04-09 16:28:31
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.x\Demo7.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({ //Application 
+        data(){
+            return{
+                message:'jspang.com'  //1.在这里定义了一个数据 也就是model
+            }
+        },
+        methods:{
+            handleitemClick(){
+                this.message = this.message == 'jspang.com'?'技术胖':'jspang.com'
+            }
+        },
+        beforeCreate() { //beforeCreate( ) ：在实例生成之前会自动执行的函数
+            console.log('beforeCreate')
+        },
+        created() { //created( ) : 在实例生成之后会自动执行的函数
+            console.log('created')
+        },
+        beforeMount() { //beforeMount( ) : 在模板渲染完成之前执行的函数
+            console.log('beforeMount')
+        },
+        mounted() {  //mounted( ) : 在模板渲染完成之后执行的函数
+            console.log('mounted')
+        },
+        template:"<h2 v-on:click='handleitemClick'>{{message}}</h2>"  //2.模板 也就是view
+        //定义后，Vue自动关联，也就是ViewModel
+    })
+    const vm = app.mount("#app")
+
+</script>
+</html>

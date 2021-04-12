@@ -1,0 +1,55 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-10 16:09:24
+ * @LastEditTime: 2021-04-10 16:26:54
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.x\Demo23-表单数据双向绑定(2).html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                checked: true,
+                cname:'未选中内容',
+                message:''
+            }
+        },
+        //lazy修饰符   在文本框中输入任何内容的时候，插值表达式会跟着改变。使用lazy修饰符，可以实现当输入完成后，失去焦点再进行改变。
+        //number修饰符 
+        //trim修饰
+        template: `
+            <div>{{checked}}<input type="checkbox" v-model="checked" /></div>
+            <div>
+                {{cname}}
+                <input 
+                    type="checkbox" 
+                    v-model="cname" 
+                    true-value="jspang.com"
+                    false-value="技术胖"
+                />
+            </div>
+            <div>
+                {{message}}
+                <input v-model="message" />
+            </div>   
+        `
+
+    })
+    const vm = app.mount("#app")
+
+</script>
+
+</html>

@@ -1,0 +1,44 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-11 13:55:54
+ * @LastEditTime: 2021-04-11 14:22:24
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.x第二季\Demo6.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({   
+
+        template:`
+            <h2>jspang.com</h2>
+            <Hello style="color:red;" msg="jspang"/>
+        `
+    })
+    app.component('Hello',{
+        mounted() {
+            console.log(this.$attrs.msg);
+        },
+        //inheritAttrs:false, 想不想接受Non-props的值，默认为true，false为不想
+        template:`
+            <h3 v-bind:style="$attrs.style">Hello World 1</h3>
+            <h3>Hello World 2</h3>
+            <h3>Hello World 3</h3> 
+        `
+    })
+
+    //Non-props 其实就是子组件没有接受父组件传递过来的参数，而子组件完全不变的复制了属性到自己的标签上，就叫做Non-props属性
+    const vm = app.mount("#app")
+</script>
+</html>

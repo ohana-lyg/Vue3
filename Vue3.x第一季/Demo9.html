@@ -1,0 +1,53 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-09 16:46:52
+ * @LastEditTime: 2021-04-09 17:10:13
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.x\Demo9.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({ //Application 
+        data(){
+            return{
+               // message:'<i>jspang.com</i>',  //1.在这里定义了一个数据 也就是model
+               message:'jspang.com', 
+               count:5
+            }
+        },
+        methods:{
+            handleitemClick(){
+                this.message = this.message == 'jspang.com'?'技术胖':'jspang.com'
+            }
+        },
+        // v-once 一次渲染，不再改变
+        /*template:`
+            <h2 
+                v-on:click='handleitemClick'
+                v-html="message"
+                v-once 
+            ></h2>`  */
+        //2.模板 也就是view
+        //定义后，Vue自动关联，也就是ViewModel
+        template:`
+            <h2 v-bind:title="message">{{message}}</h2>
+            <h2>{{count > 2 ?'大':'小'}}</h2>
+            <h2>{{1+2}}</h2>
+            <h2>{{'jspang' + '.com'}}</h2>`
+    })
+    const vm = app.mount("#app")
+
+</script>
+</html>

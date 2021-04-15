@@ -1,0 +1,58 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-14 19:57:22
+ * @LastEditTime: 2021-04-15 20:20:36
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue Router\Demo2-动态路由匹配.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <title>Document</title>
+    <style>
+        .router-link-active {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+    <p>
+        <router-link to="/user/foo">/user/foo</router-link>
+        <router-link to="/user/bar">/user/bar</router-link>
+    </p>
+    <router-view></router-view>
+    </div>
+</body>
+<script>
+
+    // 有一个 User 组件，对于所有 ID 各不相同的用户，都要使用这个组件来渲染
+    // 那么，我们可以在 vue-router 的路由路径中使用“动态路径参数”(dynamic segment) 来达到这个效果
+    const User = {
+        template: `<div>User {{ $route.params.id }}</div>`  
+    }
+    const router = new VueRouter({
+        routes: [   
+            // 动态路径参数 以冒号开头
+            { path: '/user/:id', component: User }
+        ]
+    })
+    const app = new Vue({ router }).$mount('#app')
+</script>
+
+<!-- $route.path:string类型，字符串，对应当前路由的路径，总是解析为绝对路径，如 "/foo/bar"
+$route.params:Object类型，一个 key/value 对象，包含了动态片段和全匹配片段，如果没有路由参数，就是一个空对象。
+$route.query:Object类型，一个 key/value 对象，表示URL查询参数。例如，对于路径 /foo?user=1，则有 $route.query.user == 1，如果没有查询参数，则是个空对象
+$route.hash:string类型，当前路由的 hash 值 (带 #) ，如果没有 hash 值，则为空字符串
+$route.fullPath:string类型，完成解析后的 URL，包含查询参数和 hash 的完整路径
+$route.matched:Array类型，一个数组，包含当前路由的所有嵌套路径片段的路由记录 。路由记录就是 routes 配置数组中的对象副本 (还有在 children 数组)
+$route.name ---当前路由的名称，如果有的话
+$route.redirectedFrom ---如果存在重定向，即为重定向来源的路由的名字 -->
+
+</html>

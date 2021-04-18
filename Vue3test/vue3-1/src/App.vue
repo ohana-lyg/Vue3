@@ -1,25 +1,27 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-16 16:02:15
- * @LastEditTime: 2021-04-16 21:23:29
+ * @LastEditTime: 2021-04-18 19:59:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3\vue3-1\src\App.vue
 -->
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <h2>欢迎光临红浪漫洗浴中心</h2>
-  <div>请选择一位美女为你服务</div>
   <div>
-    <button 
-      v-for = "(item,index) in girls" 
-      v-bind:key = "index"
-      @click="selectGirlFun(index)"
-    >
-      {{ index }} : {{ item }}
-    </button>
+    <img alt="Vue logo" src="./assets/logo.png">
+    <h2>欢迎光临红浪漫洗浴中心</h2>
+    <div>请选择一位美女为你服务</div>
+    <div>
+      <button 
+        v-for = "(item,index) in girls" 
+        v-bind:key = "index"
+        @click="selectGirlFun(index)"
+      >
+        {{ index }} : {{ item }}
+      </button>
+    </div>
+    <div>你选择了【{{selectGirl}}】为你服务</div>
   </div>
-  <div>你选择了【{{selectGirl}}】为你服务</div>
 
   <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/> -->
 </template>

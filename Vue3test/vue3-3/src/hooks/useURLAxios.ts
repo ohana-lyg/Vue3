@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-19 16:44:17
- * @LastEditTime: 2021-04-19 16:50:47
+ * @LastEditTime: 2021-04-20 16:43:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3\Vue3test\vue3-3\src\hooks\useURLAxios.ts
@@ -33,4 +33,4 @@ function useUrlAxios(url : string) {
     
 }
 
-export dafault useUrlAxios
+export default useUrlAxios

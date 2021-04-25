@@ -1,23 +1,23 @@
 /*
  * @Author: your name
  * @Date: 2021-04-22 19:33:00
- * @LastEditTime: 2021-04-22 21:43:44
+ * @LastEditTime: 2021-04-25 17:02:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3test\vue3-todo\src\hooks\index.ts
  */
 
 import store from "@/store"
-import { SET_TODO, SET_TODO_LIST } from "@/store/actionTypes"
+import { SET_TODO, SET_TODO_LIST, REMOVE_TODO, SET_TODO_STATUS } from "@/store/actionTypes"
 import { ITodo, TODO_STATUS } from "@/typings"
 import { Store, useStore } from "vuex"
 
 export interface IUseTodo {
     setTodo: (value: string) => void;
     setTodoList: () => void;
-    removeTodo: () => void;
-    setStatus: () => void;
-    setDoing: () => void;
+    removeTodo: (id: number) => void;
+    setStatus: (id: number) => void;
+    setDoing: (id: number) => void;
 }
 
 interface IUseLocalStorage {
@@ -45,16 +45,18 @@ function useTodo(): IUseTodo {
         store.dispatch(SET_TODO_LIST,todoList);
     }
 
-    function removeTodo() {
-        
+    function removeTodo(id: number): void {
+        store.dispatch(REMOVE_TODO, id);
+        setLocalList(store.state.list);
     }
 
-    function setStatus() {
-        
+    function setStatus(id: number): void {
+        store.dispatch(SET_TODO_STATUS, id);
+        setLocalList(store.state.list);
     }
 
-    function setDoing() {
-        
+    function setDoing(id: number): void {
+        console.log('setDoing');
     }
 
     return {

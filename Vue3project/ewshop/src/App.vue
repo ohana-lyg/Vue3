@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-26 16:34:51
+ * @LastEditTime: 2021-04-27 20:10:55
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3project\ewshop\src\App.vue
+-->
 <template>
   <div id="nav">
     <router-link to="/">Home</router-link> |
@@ -7,6 +15,7 @@
 </template>
 
 <style lang="scss">
+@import "assets/css/base.css";
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

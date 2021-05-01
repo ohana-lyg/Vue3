@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-27 20:13:41
- * @LastEditTime: 2021-04-28 21:49:22
+ * @LastEditTime: 2021-05-01 15:24:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\network\request.js
@@ -23,7 +23,7 @@ instance.interceptors.request.use( req => {
 
 //响应拦截
 instance.interceptors.response.use( res=> {
-    console.log(res);
+    // console.log(res);
     return res.data ? res.data : res;
 }, /*  err => {
     //如果有需要授权才可以访问的接口，统一去login授权

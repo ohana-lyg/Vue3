@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-30 19:48:40
- * @LastEditTime: 2021-04-30 21:04:31
+ * @LastEditTime: 2021-05-01 18:15:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\components\common\navbar\NavBar.vue
@@ -42,7 +42,8 @@ export default {
     pointer-events: fixed;
     left: 0;
     right: 0;
-    top: 0;
+    position: sticky;
+    top: 0px;
     z-index: 9;
     height: 45px;
     line-height: 45px;

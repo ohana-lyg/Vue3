@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-01 17:16:12
- * @LastEditTime: 2021-05-01 18:13:45
+ * @LastEditTime: 2021-05-02 21:45:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\components\content\tabControl\TabControl.vue

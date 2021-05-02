@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-01 14:35:23
- * @LastEditTime: 2021-05-01 16:05:27
+ * @LastEditTime: 2021-05-02 20:03:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\views\home\ChildComps\RecommendView.vue

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-26 20:27:28
- * @LastEditTime: 2021-05-01 18:06:33
+ * @LastEditTime: 2021-05-02 21:37:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\views\home\Home.vue
@@ -17,6 +17,8 @@
         </div>
         <recommend-view :recommends="recommends"></recommend-view>
         <tab-control @tabClick="tabClick" :titles="['畅销', '新书', '精选']"></tab-control>
+        <goods-list></goods-list>
+
         {{ temid }}<br>
         {{ temid }}<br>
         {{ temid }}<br>
@@ -79,6 +81,7 @@ import RecommendView from './ChildComps/RecommendView.vue';
 import TabControl from '../../components/content/tabControl/TabControl.vue';
 import { getHomeAllData } from "network/home";
 import { ref, onMounted } from 'vue';
+import GoodsList from "../../components/content/goods/GoodsList";
 export default {
     name: "Home",
 
@@ -103,6 +106,7 @@ export default {
         NavBar,
         RecommendView,
         TabControl,
+        GoodsList,
     }
 }
 </script>

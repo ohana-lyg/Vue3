@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-02 19:38:47
- * @LastEditTime: 2021-05-02 21:48:13
+ * @LastEditTime: 2021-05-03 20:02:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\components\content\goods\GoodsListItem.vue
@@ -38,17 +38,32 @@ export default {
         font-size: 14px;
         position: absolute;
         bottom: 5px;
-        left: 0px;
-        right: 0px;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        text-align: center;
 
         p {
-            
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-bottom: 3px;
         }
         .price {
-
+            color: red;
+            margin-right: 20px;
         }
         .collect {
-            
+            position: relative;
+        }
+        .collect::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            width: 14px;
+            height: 14px;
+            top: -1px;
+            background: url('~assets/images/collect.png') 0 0/14px 14px;
         }
     }
 }

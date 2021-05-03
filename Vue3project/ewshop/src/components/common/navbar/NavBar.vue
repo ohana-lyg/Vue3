@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-30 19:48:40
- * @LastEditTime: 2021-05-02 21:44:56
+ * @LastEditTime: 2021-05-03 20:08:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\components\common\navbar\NavBar.vue
@@ -39,12 +39,12 @@ export default {
     display: flex;
     background-color: var(--color-tint);
     color: #ffffff;
-    pointer-events: fixed;
+    pointer-events: fill;
     position: sticky;
-    top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    top: 0px;
+    z-index: 999;
     height: 45px;
     line-height: 45px;
     text-align: center;

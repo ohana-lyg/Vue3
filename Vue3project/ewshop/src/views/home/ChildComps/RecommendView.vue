@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-01 14:35:23
- * @LastEditTime: 2021-05-02 20:03:14
+ * @LastEditTime: 2021-05-03 19:05:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\views\home\ChildComps\RecommendView.vue
@@ -49,7 +49,7 @@ export default {
     text-align: center;
     padding: 15px 0 30px;
     border-bottom: 8px solid #eee;
-    font-size: 13px;
+    font-size: 12px;
 }
 .recommend-item {
     flex: 1;

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-26 20:27:28
- * @LastEditTime: 2021-05-02 21:37:40
+ * @LastEditTime: 2021-05-03 20:08:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\views\home\Home.vue
@@ -114,6 +114,7 @@ export default {
 .banners img {
     width: 100%;
     height: auto;
+    /* margin-top: 45px; */
 }
 
 </style>

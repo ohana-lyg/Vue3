@@ -1,105 +1,127 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-26 20:27:28
- * @LastEditTime: 2021-05-03 20:08:01
+ * @LastEditTime: 2021-05-04 20:43:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\views\home\Home.vue
 -->
 <template>
-    <div>
+    <div id="home">
         <nav-bar>
             <template v-slot:default>图书商城</template>
             <template v-slot:right></template>
         </nav-bar>
-        <div class="banners">
-            <img src="~assets/images/3.png" alt="">
-        </div>
-        <recommend-view :recommends="recommends"></recommend-view>
-        <tab-control @tabClick="tabClick" :titles="['畅销', '新书', '精选']"></tab-control>
-        <goods-list></goods-list>
-
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        {{ temid }}<br>
-        
+        <tab-control v-show="isTabFixed" @tabClick="tabClick" :titles="['畅销', '新书', '精选']"></tab-control>
+        <div class="wrapper">
+            <div class="content">
+                <div ref="banref">
+                    <div class="banners">
+                        <img src="~assets/images/3.png" alt="">
+                    </div>
+                    <recommend-view :recommends="recommends"></recommend-view>
+                </div>
+                <tab-control @tabClick="tabClick" :titles="['畅销', '新书', '精选']"></tab-control>
+                <goods-list :goods='showGoods' ></goods-list>
+            </div>
+        </div>        
     </div>
 </template>
 <script>
 import NavBar from "../../components/common/navbar/NavBar.vue";
 import RecommendView from './ChildComps/RecommendView.vue';
 import TabControl from '../../components/content/tabControl/TabControl.vue';
-import { getHomeAllData } from "network/home";
-import { ref, onMounted } from 'vue';
+import { getHomeAllData, getHomeGoods } from "network/home";
+import { ref, onMounted, reactive, computed, watchEffect, nextTick } from 'vue';
 import GoodsList from "../../components/content/goods/GoodsList";
+import BScroll from "better-scroll";
 export default {
     name: "Home",
 
     setup() {
-        let temid = ref(0);
+        
+        let isTabFixed = ref(false);
+        const banref = ref(null);
+
         const recommends = ref([]);
+        //商品列表数据模型
+        const goods = reactive({
+            sales: {page: 1, list: []},
+            new: {page: 1, list: []},
+            recommend: {page: 1, list: []}
+        })
+        let currentType = ref('sales');
+        const showGoods = computed(() => {
+            return goods[currentType.value].list;
+        }) 
+        let bscroll = reactive({});
+
         onMounted(() => {
             getHomeAllData().then(res => {
                 recommends.value = res.goods.data;
             })
+
+            getHomeGoods('sales').then(res => {
+                goods.sales.list = res.goods.data;
+            })
+            getHomeGoods('recommend').then(res => {
+                goods.recommend.list = res.goods.data;
+            })
+            getHomeGoods('new').then(res => {
+                goods.new.list = res.goods.data;
+            })
+
+            //创建BetterScroll对象
+            bscroll = new BScroll(document.querySelector('.wrapper'), {
+                probeType: 3, // 0,1,2,3   3只要在运动就触发scroll事件
+                click: true, //是否允许点击
+                pullUpLoad: true, //上拉加载更多，默认是false
+            });
+            bscroll.on('scroll', (position) => {
+                // console.log(banref.value.offsetHeight);
+                // console.log(-position.y);
+                isTabFixed.value = -(position.y) > banref.value.offsetHeight;
+            })
+            //上拉加载数据，触发pullingUp
+            bscroll.on('pullingUp', () => {
+                // console.log('上拉加载数据...');
+                const page = goods[currentType.value].page + 1;
+                getHomeGoods(currentType.value, page).then(res => {
+                    goods[currentType.value].list.push(...res.goods.data);
+                    // goods[currentType.value].page += 1;
+                })
+                //完成上拉，等待数据请求完成，要将新数据展示出来
+                bscroll.finishPullUp();
+                //重新计算高度
+                // console.log("contentheight"+document.querySelector('.content').clientHeight);
+                bscroll.refresh();
+            })
+
         })
         const tabClick = (index) => {
-            temid.value = index;
+            let types = ['sales','new','recommend'];
+            nextTick(() => {
+                //重新计算高度
+                bscroll && bscroll.refresh();
+            })
+            currentType.value = types[index];
         }
+
+        //监听 任何一个变量有变化，触发
+        watchEffect(() => {
+            nextTick(() => {
+                //重新计算高度
+                bscroll && bscroll.refresh();
+            })
+        })
+
         return {
             recommends,
-            temid,
             tabClick,
+            goods,
+            showGoods,
+            isTabFixed,
+            banref
         }
     },
     components: {
@@ -113,8 +135,21 @@ export default {
 <style scoped>
 .banners img {
     width: 100%;
+    /* height: 200px; */
     height: auto;
     /* margin-top: 45px; */
 }
-
+#home {
+    height: 100vh;
+    position: relative;
+}
+.wrapper {
+    position: absolute;
+    top: 45px;
+    bottom: 50px;
+    left: 0px;
+    right: 0px;
+    overflow: hidden;
+    /* background: red; */
+}
 </style>

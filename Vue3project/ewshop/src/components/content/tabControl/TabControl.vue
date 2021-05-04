@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-01 17:16:12
- * @LastEditTime: 2021-05-03 20:03:19
+ * @LastEditTime: 2021-05-04 21:02:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\components\content\tabControl\TabControl.vue
@@ -33,6 +33,7 @@ export default {
         let currentIndex = ref(0);
         const itemClick = (index) => {
             currentIndex.value = index;
+            // console.log(index);
             emit('tabClick', index);
         }
         return {

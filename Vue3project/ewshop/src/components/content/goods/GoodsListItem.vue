@@ -1,18 +1,18 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-02 19:38:47
- * @LastEditTime: 2021-05-03 20:02:51
+ * @LastEditTime: 2021-05-04 18:29:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\components\content\goods\GoodsListItem.vue
 -->
 <template>
     <div class="goods-item">
-        <img src="~assets/images/22.png" alt="">
+        <img :src="product.cover_url" alt="">
         <div class="goods-info">
-            <p>标题</p>
-            <span class="price"><small>￥</small>100</span>
-            <span class="collect">3</span>
+            <p>{{ product.title }}</p>
+            <span class="price"><small>￥</small>{{ product.price }}</span>
+            <span class="collect">{{ product.collects_count }}</span>
         </div>
     </div>
 </template>
@@ -20,6 +20,12 @@
 <script>
 export default {
     name: "GoodsListItem",
+    props: {
+        product: Object,
+        default() {
+            return [];
+        }
+    }
 }
 </script>
 

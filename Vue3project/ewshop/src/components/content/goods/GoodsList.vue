@@ -1,21 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-02 19:37:47
- * @LastEditTime: 2021-05-03 20:00:49
+ * @LastEditTime: 2021-05-04 20:12:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\components\content\goods\GoodsList.vue
 -->
 <template>
     <div class="goods">
-        <goods-list-item></goods-list-item>
-        <goods-list-item></goods-list-item>
-        <goods-list-item></goods-list-item>
-        <goods-list-item></goods-list-item>
-        <goods-list-item></goods-list-item>
-        <goods-list-item></goods-list-item>
-        <goods-list-item></goods-list-item>
-        <goods-list-item></goods-list-item>
+        <goods-list-item v-for="item in goods" :product="item" :key="item"></goods-list-item>
     </div>
 </template>
 
@@ -23,6 +16,14 @@
 import GoodsListItem from "./GoodsListItem";
 export default {
     name: "GoodsList",
+    props: {
+        goods: {
+            type: Array,
+            default() {
+                return [];
+            }
+        }
+    },
     components: {
         GoodsListItem,
     }

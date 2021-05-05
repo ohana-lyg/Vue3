@@ -1,12 +1,21 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-26 16:34:51
- * @LastEditTime: 2021-05-03 19:29:55
+ * @LastEditTime: 2021-05-05 21:48:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\App.vue
 -->
 <template>
+
+  <!-- <router-view v-solt="{ component }">
+    <transition>
+      <keep-alive>
+        <component :is="component" />
+      </keep-alive>
+    </transition>
+  </router-view> -->
+
   <div>
     <router-view/>
     <div id="nav">

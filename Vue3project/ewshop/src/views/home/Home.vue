@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-26 20:27:28
- * @LastEditTime: 2021-05-04 20:43:55
+ * @LastEditTime: 2021-05-05 21:38:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\views\home\Home.vue
@@ -24,16 +24,18 @@
                 <tab-control @tabClick="tabClick" :titles="['畅销', '新书', '精选']"></tab-control>
                 <goods-list :goods='showGoods' ></goods-list>
             </div>
-        </div>        
+        </div>
+        <back-top @BTop="BTop" v-show="isShowBackTop"></back-top>        
     </div>
 </template>
 <script>
 import NavBar from "../../components/common/navbar/NavBar.vue";
 import RecommendView from './ChildComps/RecommendView.vue';
 import TabControl from '../../components/content/tabControl/TabControl.vue';
+import GoodsList from "../../components/content/goods/GoodsList";
+import BackTop from "../../components/common/backtop/BackTop";
 import { getHomeAllData, getHomeGoods } from "network/home";
 import { ref, onMounted, reactive, computed, watchEffect, nextTick } from 'vue';
-import GoodsList from "../../components/content/goods/GoodsList";
 import BScroll from "better-scroll";
 export default {
     name: "Home",
@@ -41,6 +43,7 @@ export default {
     setup() {
         
         let isTabFixed = ref(false);
+        let isShowBackTop = ref(false);
         const banref = ref(null);
 
         const recommends = ref([]);
@@ -80,7 +83,7 @@ export default {
             bscroll.on('scroll', (position) => {
                 // console.log(banref.value.offsetHeight);
                 // console.log(-position.y);
-                isTabFixed.value = -(position.y) > banref.value.offsetHeight;
+                isShowBackTop.value = isTabFixed.value = -(position.y) > banref.value.offsetHeight;
             })
             //上拉加载数据，触发pullingUp
             bscroll.on('pullingUp', () => {
@@ -115,13 +118,19 @@ export default {
             })
         })
 
+        const BTop = () => {
+            bscroll.scrollTo(0, 0, 500);
+        }
+
         return {
             recommends,
             tabClick,
             goods,
             showGoods,
             isTabFixed,
-            banref
+            isShowBackTop,
+            banref,
+            BTop
         }
     },
     components: {
@@ -129,6 +138,7 @@ export default {
         RecommendView,
         TabControl,
         GoodsList,
+        BackTop,
     }
 }
 </script>

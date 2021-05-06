@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-26 20:27:28
- * @LastEditTime: 2021-05-05 21:38:30
+ * @LastEditTime: 2021-05-06 19:59:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\views\home\Home.vue
@@ -16,9 +16,7 @@
         <div class="wrapper">
             <div class="content">
                 <div ref="banref">
-                    <div class="banners">
-                        <img src="~assets/images/3.png" alt="">
-                    </div>
+                    <home-swiper :banners="banners"></home-swiper>
                     <recommend-view :recommends="recommends"></recommend-view>
                 </div>
                 <tab-control @tabClick="tabClick" :titles="['畅销', '新书', '精选']"></tab-control>
@@ -29,6 +27,7 @@
     </div>
 </template>
 <script>
+import HomeSwiper from './ChildComps/HomeSwiper';
 import NavBar from "../../components/common/navbar/NavBar.vue";
 import RecommendView from './ChildComps/RecommendView.vue';
 import TabControl from '../../components/content/tabControl/TabControl.vue';
@@ -58,10 +57,12 @@ export default {
             return goods[currentType.value].list;
         }) 
         let bscroll = reactive({});
+        let banners = ref([]);
 
         onMounted(() => {
             getHomeAllData().then(res => {
                 recommends.value = res.goods.data;
+                banners.value = res.slides;
             })
 
             getHomeGoods('sales').then(res => {
@@ -130,25 +131,22 @@ export default {
             isTabFixed,
             isShowBackTop,
             banref,
-            BTop
+            BTop,
+            banners
         }
     },
     components: {
+        HomeSwiper,
         NavBar,
         RecommendView,
         TabControl,
-        GoodsList,
         BackTop,
+        GoodsList,
     }
 }
 </script>
 <style scoped>
-.banners img {
-    width: 100%;
-    /* height: 200px; */
-    height: auto;
-    /* margin-top: 45px; */
-}
+
 #home {
     height: 100vh;
     position: relative;

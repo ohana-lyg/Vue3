@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-01 14:35:23
- * @LastEditTime: 2021-05-03 19:05:47
+ * @LastEditTime: 2021-05-06 20:06:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\views\home\ChildComps\RecommendView.vue
@@ -10,7 +10,7 @@
     <div class="recommend">
         <div class="recommend-item" v-for="item in recommends.slice(0,4)" :key="item.id">
             <a href="" @click.prevent = "goD(item.id)">
-                <img :src="item.cover_url" alt="">
+                <img v-lazy="item.cover_url" alt="">
                 <div>{{item.title}}</div>
             </a>
         </div>

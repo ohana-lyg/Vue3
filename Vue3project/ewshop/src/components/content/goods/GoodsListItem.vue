@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-02 19:38:47
- * @LastEditTime: 2021-05-04 18:29:48
+ * @LastEditTime: 2021-05-06 20:04:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\components\content\goods\GoodsListItem.vue
 -->
 <template>
     <div class="goods-item">
-        <img :src="product.cover_url" alt="">
+        <img v-lazy="product.cover_url" alt="">
         <div class="goods-info">
             <p>{{ product.title }}</p>
             <span class="price"><small>￥</small>{{ product.price }}</span>

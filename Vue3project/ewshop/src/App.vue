@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-26 16:34:51
- * @LastEditTime: 2021-05-05 21:48:40
+ * @LastEditTime: 2021-05-07 21:12:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\App.vue
 -->
 <template>
 
-  <!-- <router-view v-solt="{ component }">
+  <!-- <router-view v-solt="{ Component }">
     <transition>
       <keep-alive>
         <component :is="component" />
@@ -28,7 +28,11 @@
         <div>分类</div>
       </router-link> 
       <router-link class="tab-bar-item" to="/shopcart">
-        <div class="icon"><i class="iconfont icon-gouwuche1"></i></div>
+        <div class="icon">
+          <van-badge :content="20" max="9">
+            <i class="iconfont icon-gouwuche1"></i>
+          </van-badge>
+        </div>
         <div>购物车</div>
         </router-link> 
       <router-link class="tab-bar-item" to="/profile">

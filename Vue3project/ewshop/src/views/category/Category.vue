@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-29 21:25:29
- * @LastEditTime: 2021-05-08 23:42:38
+ * @LastEditTime: 2021-05-10 19:49:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\views\category\Category.vue
@@ -52,13 +52,16 @@
                 </div>
             </div>
         </div>
+        <back-top @BTop="BTop" v-show="isShowBackTop"></back-top>
     </div>
 </template>
 
 <script>
 import NavBar from "../../components/common/navbar/NavBar";
+import BackTop from "../../components/common/backtop/BackTop";
 import { getCategory, getCategoryGoods } from "../../network/category";
-import { ref, onMounted, reactive, computed } from 'vue';
+import { ref, onMounted, reactive, computed, watchEffect, nextTick } from 'vue';
+import BScroll from "better-scroll";
 export default {
     name: "Category",
     setup() {
@@ -66,6 +69,8 @@ export default {
         let activeKey = ref(0);
         let activeName = ref(1);
         let categories = ref([]);
+        let isShowBackTop = ref(false);
+        
         //当前排序
         let currentOrders = ref('sales');
         //当前的分类商品
@@ -94,6 +99,7 @@ export default {
             })
         }
 
+        let bscroll = reactive({});
 
         onMounted(() => {
             getCategory().then(res => {
@@ -103,6 +109,38 @@ export default {
                 goods.sales.list = res.goods.data;
             })
             // init();
+
+            bscroll = new BScroll(document.querySelector('.goodslist'), {
+                probeType: 3, // 0,1,2,3   3只要在运动就触发scroll事件
+                click: true, //是否允许点击
+                pullUpLoad: true, //上拉加载更多，默认是false
+            });
+
+            bscroll.on('scroll', (position) => {
+                // console.log(banref.value.offsetHeight);
+                // console.log(-position.y);
+                isShowBackTop.value = (-position.y) > 300;
+                // isShowBackTop.value = isTabFixed.value = -(position.y) > banref.value.offsetHeight;
+            })
+
+            //上拉加载数据，触发pullingUp
+            bscroll.on('pullingUp', () => {
+                // console.log('上拉加载数据...');
+                const page = goods[currentOrders.value].page + 1;
+                getCategoryGoods(currentOrders.value, currrentCid.value, page).then( res => {
+                    goods[currentOrders.value].list.push(...res.goods.data);
+                    goods[currentOrders.value].page += 1;
+                })
+
+                //完成上拉，等待数据请求完成，要将新数据展示出来
+                bscroll.finishPullUp();
+                //重新计算高度
+                // console.log("contentheight"+document.querySelector('.content').clientHeight);
+                nextTick(() => {
+                    //重新计算高度
+                    bscroll && bscroll.refresh();
+                })
+            })
         })
         //排序选项卡
         const tabClick = (index) => {
@@ -110,6 +148,10 @@ export default {
             currentOrders.value = orders[index];
             getCategoryGoods(currentOrders.value, currrentCid.value).then( res => {
                 goods[currentOrders.value].list = res.goods.data;
+                nextTick(() => {
+                    //重新计算高度
+                    bscroll && bscroll.refresh();
+                })
             })
 
             // console.log("当前分类：" + currrentCid.value);
@@ -124,6 +166,18 @@ export default {
             // console.log("当前排序：" + currentOrders.value);
         }
 
+        //监听 任何一个变量有变化，触发
+        watchEffect(() => {
+            nextTick(() => {
+                //重新计算高度
+                bscroll && bscroll.refresh();
+            })
+        })
+
+        const BTop = () => {
+            bscroll.scrollTo(0, 0, 500);
+        }
+
         return {
             active,
             activeKey,
@@ -134,11 +188,15 @@ export default {
             getGoods,
             goods,
             currrentCid,
-            ShowGoods
+            ShowGoods,
+            bscroll,
+            isShowBackTop,
+            BTop
         }
     },
     components: {
         NavBar,
+        BackTop
     }
 }
 </script>

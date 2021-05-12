@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-30 19:48:40
- * @LastEditTime: 2021-05-07 22:23:13
+ * @LastEditTime: 2021-05-12 20:09:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\components\common\navbar\NavBar.vue
@@ -14,15 +14,21 @@
             </slot>
         </div>
         <div class="center"><slot></slot></div>
-        <div class="right"><slot name="right"></slot></div>
+        <div class="right">
+            <slot name="right">
+                <img src="@/assets/images/right.png" alt="">
+            </slot>
+        </div>
     </div>
 </template>
 
 <script>
 import { useRouter } from "vue-router";
+
 export default {
     name: "NavBar",
     setup() {
+        
         const router = useRouter();
         const goback = () => {
             router.go(-1);
@@ -58,8 +64,13 @@ export default {
     width: 45px;
     padding: 12px;
 }
+.right img {
+    width: 45px;
+    padding: 12px;
+}
 .center {
     flex: 1;
 }
+
 
 </style>

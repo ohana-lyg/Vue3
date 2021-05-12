@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-29 21:27:21
- * @LastEditTime: 2021-05-01 16:12:48
+ * @LastEditTime: 2021-05-12 20:38:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\views\detail\Detail.vue
@@ -17,8 +17,9 @@
 
 <script>
 import NavBar from "../../components/common/navbar/NavBar";
+import { getDetail } from "../../network/detail";
 import { useRoute } from "vue-router";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 export default {
     name: "Detail",
     components: {
@@ -27,7 +28,11 @@ export default {
     setup() {
         const route = useRoute();
         let id = ref(0);
-        id.value = route.query.id; 
+
+        onMounted(() => {
+            id.value = route.query.id;
+            getDetail();
+        }) 
         return {
             id,
         }

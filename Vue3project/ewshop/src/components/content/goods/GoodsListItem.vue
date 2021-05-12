@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-02 19:38:47
- * @LastEditTime: 2021-05-06 20:04:50
+ * @LastEditTime: 2021-05-12 20:27:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\components\content\goods\GoodsListItem.vue
 -->
 <template>
-    <div class="goods-item">
+    <div class="goods-item" @click="itemClick">
         <img v-lazy="product.cover_url" alt="">
         <div class="goods-info">
             <p>{{ product.title }}</p>
@@ -18,12 +18,21 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router';
 export default {
     name: "GoodsListItem",
     props: {
         product: Object,
         default() {
             return [];
+        }
+    },
+    setup(props) {
+        const router = useRouter();
+        return {
+            itemClick: () => {
+                router.push({ path: '/detail', query: {id: props.product.id }});
+            }
         }
     }
 }

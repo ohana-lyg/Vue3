@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-29 21:25:29
- * @LastEditTime: 2021-05-10 19:49:21
+ * @LastEditTime: 2021-05-12 20:19:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\views\category\Category.vue
@@ -41,7 +41,8 @@
                 <div class="content">
                     <van-card
                         v-for="item in ShowGoods"
-                        :key="item.id" 
+                        :key="item.id"
+                        @click="itemClick(item.id)" 
                         :num="item.sales"
                         :tag="item.comments_count >= 0 ? '热门' : '一般'"
                         :price="item.price"
@@ -61,10 +62,12 @@ import NavBar from "../../components/common/navbar/NavBar";
 import BackTop from "../../components/common/backtop/BackTop";
 import { getCategory, getCategoryGoods } from "../../network/category";
 import { ref, onMounted, reactive, computed, watchEffect, nextTick } from 'vue';
+import { useRouter } from 'vue-router';
 import BScroll from "better-scroll";
 export default {
     name: "Category",
     setup() {
+        const router = useRouter();
         let active = ref(1);
         let activeKey = ref(0);
         let activeName = ref(1);
@@ -191,7 +194,10 @@ export default {
             ShowGoods,
             bscroll,
             isShowBackTop,
-            BTop
+            BTop,
+            itemClick:(id) => {
+                router.push({ path: '/detail', query: { id }});
+            }
         }
     },
     components: {

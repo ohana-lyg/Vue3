@@ -1,13 +1,12 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-26 16:34:51
- * @LastEditTime: 2021-05-07 21:12:06
+ * @LastEditTime: 2021-05-13 20:27:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\App.vue
 -->
 <template>
-
   <!-- <router-view v-solt="{ Component }">
     <transition>
       <keep-alive>

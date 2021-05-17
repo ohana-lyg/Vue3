@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-29 21:27:21
- * @LastEditTime: 2021-05-13 22:21:40
+ * @LastEditTime: 2021-05-17 20:14:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\views\detail\Detail.vue

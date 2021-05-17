@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-26 16:34:51
- * @LastEditTime: 2021-04-30 21:15:21
+ * @LastEditTime: 2021-05-17 15:23:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\router\index.js
@@ -12,6 +12,7 @@ const Home = () => import( '../views/home/Home');
 const Category = () => import( '../views/category/Category');
 const Detail = () => import( '../views/detail/Detail');
 const Profile = () => import( '../views/profile/Profile');
+const Register = () => import( '../views/profile/Register');
 const ShopCart = () => import( '../views/shopcart/ShopCart');
 
 const routes = [
@@ -53,6 +54,14 @@ const routes = [
     component: Profile,
     meta: {
       title:'图书商城-个人中心'
+    }
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+    meta: {
+      title:'图书商城-用户注册'
     }
   },
   {

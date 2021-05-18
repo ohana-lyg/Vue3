@@ -1,12 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2021-04-27 20:13:41
- * @LastEditTime: 2021-05-17 20:39:31
+ * @LastEditTime: 2021-05-18 16:38:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\network\request.js
  */
 import axios from 'axios';
+import { Notify } from 'vant';
 
 const instance = axios.create({
     baseURL: 'https://api.shop.eduwork.cn',
@@ -29,7 +30,7 @@ instance.interceptors.response.use( res=> {
     //如果有需要授权才可以访问的接口，统一去login授权
     
     //如果有错误，这里面会去处理，显示错误信息
-    console.log(err);
+    Notify(err.response.data.errors[Object.keys(err.response.data.errors)[0]][0]);
 })
 
 export default instance

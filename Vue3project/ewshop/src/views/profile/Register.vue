@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-15 21:01:24
- * @LastEditTime: 2021-05-17 22:45:17
+ * @LastEditTime: 2021-05-18 22:14:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ewshop\src\views\profile\Register.vue
@@ -52,6 +52,9 @@
                     :rules="[{ required: true, message: '请填写电子邮箱' }]"
                 />
                 <div style="margin: 16px;">
+                    <div class="link-login" @click="$router.push({path: '/login'})" >
+                        已有账号，立即登录
+                    </div>
                     <van-button round block type="info" color="#42b983" native-type="submit">提交</van-button>
                 </div>
             </van-form>
@@ -62,14 +65,17 @@
 <script>
 import NavBar from "../../components/common/navbar/NavBar";
 import { register } from '../../network/user';
-import { Toast } from 'vant';
+import { Notify, Toast } from 'vant';
 import { toRefs, reactive } from 'vue';
+import { useRouter } from 'vue-router';
 export default {
     name: 'Register',
     components: {
         NavBar
     },
     setup() {
+        const router = useRouter();
+
         const userinfo = reactive({
             name: '',
             password: '',
@@ -80,12 +86,20 @@ export default {
         const onSubmit = () => {
             //先验证
             if(userinfo.password != userinfo.password_confirmation) {
-                Toast('密码不一致');
+                Notify('密码不一致');
             }
             else {
                 //再提交给服务器
                 register(userinfo).then(res => {
-                    console.log(res);
+                    // console.log(res);
+                    if(res.status == '201') {
+                        Toast.success('注册成功');
+                        setTimeout(() => {
+                            router.push({path: '/login' });
+                        }, 1000);
+                    }
+                    userinfo.password_confirmation = '';
+                    userinfo.password = '';
                 })
             }
         }
@@ -100,5 +114,11 @@ export default {
 </script>
 
 <style scoped>
-
+.link-login {
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: pink;
+    /* display: inline-block; */
+    float: left;
+}
 </style>

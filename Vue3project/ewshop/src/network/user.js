@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-17 19:24:47
- * @LastEditTime: 2021-05-17 20:08:14
+ * @LastEditTime: 2021-05-19 19:16:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit 
  * @FilePath: \ewshop\src\network\user.js
@@ -13,5 +13,20 @@ export function register(data) {
         url: '/api/auth/register',
         method: 'post',
         data
+    })
+}
+
+export function login(data) {
+    return instance ({
+        url: '/api/auth/login',
+        method: 'post',
+        data
+    })
+}
+
+export function logout() {
+    return instance ({
+        url: '/api/auth/logout',
+        method: 'post',
     })
 }

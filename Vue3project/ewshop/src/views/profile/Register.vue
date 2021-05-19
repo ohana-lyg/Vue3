@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-15 21:01:24
- * @LastEditTime: 2021-05-18 22:14:00
+ * @LastEditTime: 2021-05-19 18:54:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ewshop\src\views\profile\Register.vue
@@ -52,7 +52,7 @@
                     :rules="[{ required: true, message: '请填写电子邮箱' }]"
                 />
                 <div style="margin: 16px;">
-                    <div class="link-login" @click="$router.push({path: '/login'})" >
+                    <div class="link-login" @click="$router.push({path: '/login'})">
                         已有账号，立即登录
                     </div>
                     <van-button round block type="info" color="#42b983" native-type="submit">提交</van-button>
@@ -117,8 +117,9 @@ export default {
 .link-login {
     font-size: 14px;
     margin-bottom: 15px;
-    color: pink;
+    color: orangered;
     /* display: inline-block; */
-    float: left;
+    text-align: left;
+    /* float: left; */
 }
 </style>

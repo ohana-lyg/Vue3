@@ -1,18 +1,21 @@
 /*
  * @Author: your name
  * @Date: 2021-04-26 16:34:51
- * @LastEditTime: 2021-05-17 15:23:46
+ * @LastEditTime: 2021-05-19 20:34:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\router\index.js
  */
 import { createRouter, createWebHistory } from 'vue-router'
+import { Toast } from 'vant';
+import store from '../store';
 // import Home from '../views/Home.vue'
 const Home = () => import( '../views/home/Home');
 const Category = () => import( '../views/category/Category');
 const Detail = () => import( '../views/detail/Detail');
 const Profile = () => import( '../views/profile/Profile');
 const Register = () => import( '../views/profile/Register');
+const Login = () => import( '../views/profile/Login')
 const ShopCart = () => import( '../views/shopcart/ShopCart');
 
 const routes = [
@@ -53,7 +56,8 @@ const routes = [
     name: 'Profile',
     component: Profile,
     meta: {
-      title:'图书商城-个人中心'
+      title:'图书商城-个人中心',
+      isAuthorconfirm: true
     }
   },
   {
@@ -65,11 +69,20 @@ const routes = [
     }
   },
   {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+    meta: {
+      title:'图书商城-用户登录'
+    }
+  },
+  {
     path: '/shopcart',
     name: 'ShopCart',
     component: ShopCart,
     meta: {
-      title:'图书商城-购物车'
+      title:'图书商城-购物车',
+      isAuthorconfirm: true
     }
   },
 ]
@@ -80,7 +93,13 @@ const router = createRouter({
 })
 router.beforeEach((to, from, next) => {
   //如果没有登录，在这里login
-  next();
+  if(to.meta.isAuthorconfirm && store.state.user.isLogin == false) {
+    Toast('您还没有登录，请先登录');
+    return next('/login');
+  }
+  else {
+    next();
+  }
   document.title = to.meta.title;
 })
 

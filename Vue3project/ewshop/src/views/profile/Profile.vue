@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-29 21:29:19
- * @LastEditTime: 2021-05-12 19:54:09
+ * @LastEditTime: 2021-05-19 20:17:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\views\profile\Profile.vue
@@ -11,19 +11,49 @@
         <nav-bar>
             <template v-slot:default>个人中心</template>
         </nav-bar>
+        <div class="logout">
+            <van-button @click="tologout" round block color="#44BA80">退出登录</van-button>
+        </div>
     </div>
 </template>
 
 <script>
 import NavBar from "../../components/common/navbar/NavBar";
+import { logout } from '../../network/user';
+import { Toast } from 'vant';
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 export default {
     name: "Profile",
     components: {
         NavBar,
+    },
+    setup() {
+        const router = useRouter();
+        const store = useStore();
+
+        const tologout = () => {
+            logout().then(res => {
+                if(res.status == '204') {
+                    Toast.success('退出成功');
+                    //清除(window.localStorage里的)token
+                    window.localStorage.setItem('token', '');
+                    store.commit('setIsLogin', false);
+                    setTimeout(() => {
+                        router.push({path: '/login'});
+                    }, 500);
+                }
+            })
+        }
+        return {
+            tologout
+        }
     }
 }
 </script>
 
 <style scoped>
-
+.logout {
+    margin-top: 100px;
+}
 </style>

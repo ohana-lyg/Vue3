@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-29 21:27:21
- * @LastEditTime: 2021-05-17 20:14:10
+ * @LastEditTime: 2021-05-21 22:30:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\views\detail\Detail.vue
@@ -28,11 +28,11 @@
                 <van-tag plain type="danger">推荐</van-tag>
             </template>
             <template #footer>
-                <van-button type="warning">加入购物车</van-button>
-                <van-button type="danger">立即购买</van-button>
+                <van-button type="warning" @click="addshoppingCart">加入购物车</van-button>
+                <van-button type="danger" @click="goToCart">立即购买</van-button>
             </template>
         </van-card>
-        <van-tabs v-model="active">
+        <van-tabs class="con" v-model="active">
             <van-tab title="概述">
                 <div class="content" v-html="detail.details">
                     
@@ -54,8 +54,11 @@
 import NavBar from "../../components/common/navbar/NavBar";
 import GoodsList from "../../components/content/goods/GoodsList";
 import { getDetail } from "../../network/detail";
-import { useRoute } from "vue-router";
+import { addCart } from '../../network/cart';
+import { useRoute, useRouter } from "vue-router";
+import { useStore } from 'vuex';
 import { ref, onMounted, reactive, toRefs } from "vue";
+import { Toast } from 'vant';
 export default {
     name: "Detail",
     components: {
@@ -65,6 +68,8 @@ export default {
     setup() {
         let active = ref(1);
         const route = useRoute();
+        const router = useRouter();
+        const store = useStore();
         let id = ref(0);
         let book = reactive({
             detail: {},
@@ -77,11 +82,46 @@ export default {
                 book.detail = res.goods;
                 book.like_goods = res.like_goods;
             })
-        }) 
+        })
+        //添加购物车
+        const addshoppingCart = () => {
+            addCart({
+                goods_id: book.detail.id,
+                num: 1
+            }).then(res => {
+                //204是购物车存在该商品，返回状态码204 
+                //201是购物车没有该商品，即在将该商品加入购物车会返回状态码201
+                if(res.status == '204' || res.status == '201') {
+                    Toast.success('添加成功');
+                    //设置store中的cartCount数量
+                    store.dispatch('updateCart');
+                }
+            })
+        }
+
+        //立即购买
+        const goToCart = () => {
+            addCart({
+                goods_id: book.detail.id,
+                num: 1
+            }).then(res => {
+                //204是购物车存在该商品，返回状态码204 
+                //201是购物车没有该商品，即在将该商品加入购物车会返回状态码201
+                if(res.status == '204' || res.status == '201') {
+                    Toast.success('显示购物车');
+                    //设置store中的cartCount数量
+                    store.dispatch('updateCart');
+                    router.push({path: '/shopcart'});
+                }
+            })
+        }
+        
         return {
             id,
             ...toRefs(book),
             active,
+            addshoppingCart,
+            goToCart
         }
     }
 }
@@ -90,6 +130,8 @@ export default {
 <style scoped lang="scss">
 .content {
     padding: 10px;
-
+}
+.con {
+    margin-bottom: 50px;
 }
 </style>

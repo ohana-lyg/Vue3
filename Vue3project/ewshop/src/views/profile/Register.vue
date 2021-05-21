@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-15 21:01:24
- * @LastEditTime: 2021-05-20 22:26:29
+ * @LastEditTime: 2021-05-20 22:43:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ewshop\src\views\profile\Register.vue
@@ -98,8 +98,8 @@ export default {
                             router.push({path: '/login' });
                         }, 1000);
                     }
-                    userinfo.password = '';
                     userinfo.password_confirmation = '';
+                    userinfo.password = '';
                 })
             }
         }

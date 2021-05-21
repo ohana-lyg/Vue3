@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-26 16:34:51
- * @LastEditTime: 2021-05-13 20:27:48
+ * @LastEditTime: 2021-05-21 22:40:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\App.vue
@@ -28,7 +28,7 @@
       </router-link> 
       <router-link class="tab-bar-item" to="/shopcart">
         <div class="icon">
-          <van-badge :content="20" max="9">
+          <van-badge :content="$store.state.cartCount" max="9">
             <i class="iconfont icon-gouwuche1"></i>
           </van-badge>
         </div>
@@ -41,6 +41,20 @@
     </div>
   </div>
 </template>
+
+<script>
+import { onMounted } from 'vue';
+import { useStore } from 'vuex';
+
+export default {
+  setup() {
+    const store = useStore();
+    onMounted(() => {
+      store.dispatch('updateCart');
+    })
+  }
+}
+</script>
 
 <style lang="scss">
 @import "assets/css/base.css";

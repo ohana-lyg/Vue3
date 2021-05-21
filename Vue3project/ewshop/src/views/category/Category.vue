@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-29 21:25:29
- * @LastEditTime: 2021-05-12 20:19:53
+ * @LastEditTime: 2021-05-21 21:26:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\views\category\Category.vue
@@ -210,6 +210,7 @@ export default {
 <style scoped lang="scss">
 #mainbox {
     margin-top: 45px;
+    // margin-bottom: 50px;
     display: flex;
     .ordertab {
         flex: 1;

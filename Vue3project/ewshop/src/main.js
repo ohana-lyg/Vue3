@@ -12,11 +12,13 @@ import router from './router'
 import store from './store'
 import 'vant/lib/index.css'
 
-import {Field, Form, Button, Tag, Image as VanImage, Swipe, SwipeItem, Lazyload, Badge, Sidebar, SidebarItem, Collapse, CollapseItem, Tab, Tabs, Card, Search, Toast } from 'vant';
+import { Stepper, SubmitBar, SwipeCell, Checkbox, CheckboxGroup, Field, Form, Button, Tag, Image as VanImage, Swipe, SwipeItem, Lazyload, Badge, Sidebar, SidebarItem, Collapse, CollapseItem, Tab, Tabs, Card, Search, Toast } from 'vant';
 
 createApp(App)
     .use(Swipe).use(SwipeItem).use(Lazyload, {
         loading: require('./assets/images/3.png')
     }).use(Badge).use(Sidebar).use(SidebarItem).use(Collapse).use(CollapseItem)
-    .use(Tab).use(Tabs).use(Card).use(Search).use(Toast).use(VanImage).use(Button).use(Tag).use(Form).use(Field)
+    .use(Tab).use(Tabs).use(Card).use(Search).use(Toast).use(VanImage).use(Button)
+    .use(Tag).use(Form).use(Field).use(Checkbox).use(CheckboxGroup).use(SwipeCell)
+    .use(SubmitBar).use(Stepper)
     .use(store).use(router).mount('#app')

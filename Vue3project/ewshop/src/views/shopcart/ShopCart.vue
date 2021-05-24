@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-29 21:30:16
- * @LastEditTime: 2021-05-23 22:17:23
+ * @LastEditTime: 2021-05-24 19:15:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\views\shopcart\ShopCart.vue
@@ -39,12 +39,13 @@
                                 icon="delete"
                                 type="danger" 
                                 class="delete-button" 
+                                @click="deleteGood(item.id)"
                             />
                         </template>
                     </van-swipe-cell>
                 </van-checkbox-group>
             </div>
-            <van-submit-bar class="submit-all" :price="3050" button-text="结算">
+            <van-submit-bar class="submit-all" :price="total * 100" @submit="onsubmit" button-text="结算">
                 <van-checkbox @click="allcheck" v-model:checked="checkAll">全选</van-checkbox>
             </van-submit-bar>
             <div class="empty" v-if="!list.length">
@@ -58,16 +59,16 @@
 
 <script>
 import NavBar from "../../components/common/navbar/NavBar";
-import { getCart, /* deleteCartItem, */ checkedCartshopping, modifyCart } from '../../network/cart';
+import { getCart, deleteCartItem, checkedCartshopping, modifyCart } from '../../network/cart';
 import { useRouter } from 'vue-router';
-// import { useStore } from 'vuex';
+import { useStore } from 'vuex';
 import { Toast } from 'vant';
-import { onMounted, reactive, toRefs } from 'vue';
+import { computed, onMounted, reactive, toRefs } from 'vue';
 export default {
     name: "ShopCart",
     setup() {
         const router = useRouter();
-        // const store = useStore();
+        const store = useStore();
         
         //数据模型，状态
         const state = reactive({
@@ -135,6 +136,35 @@ export default {
             }
         }
 
+        //删除商品
+        const deleteGood = (id) => {
+            deleteCartItem(id).then(() => {
+                init();
+                store.dispatch('updateCart'); //改变vuex中的状态数量（商品数量）
+            })
+        }
+        
+        //通过计算属性 计算总价
+        const total = computed(() => {
+            let sum = 0;
+
+            state.list.filter(item => state.result.includes(item.id)).forEach(item => {
+                sum += parseInt(item.num) * parseFloat(item.goods.price);
+            })
+            return sum;
+        })
+
+        //结算
+        const onsubmit = () => {
+            if(state.result == 0) {
+                Toast.fail('请选择商品进行结算');
+                return;
+            }
+            else {
+                router.push({path: '/createorder'});
+            }
+        }
+
         //前往购物
         const GoTo = () => {
             router.push({path: '/home'});
@@ -145,7 +175,10 @@ export default {
             GoTo,
             onChange,
             groupChange,
-            allcheck
+            allcheck,
+            deleteGood,
+            total,
+            onsubmit
         }
     },
     components: {

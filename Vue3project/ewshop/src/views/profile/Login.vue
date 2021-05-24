@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-15 21:01:24
- * @LastEditTime: 2021-05-19 20:15:42
+ * @LastEditTime: 2021-05-24 21:49:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ewshop\src\views\profile\Login.vue
@@ -17,7 +17,7 @@
                     width="10rem"
                     height="10rem"
                     fit="contain"
-                    src="https://img01.yzcdn.cn/vant/cat.jpeg"
+                    :src="require('@/assets/images/Mall-logo.png')"
                 />
             </div>
             <van-form @submit="onSubmit">

@@ -12,7 +12,7 @@ import router from './router'
 import store from './store'
 import 'vant/lib/index.css'
 
-import { Stepper, SubmitBar, SwipeCell, Checkbox, CheckboxGroup, Field, Form, Button, Tag, Image as VanImage, Swipe, SwipeItem, Lazyload, Badge, Sidebar, SidebarItem, Collapse, CollapseItem, Tab, Tabs, Card, Search, Toast } from 'vant';
+import { Icon, Stepper, SubmitBar, SwipeCell, Checkbox, CheckboxGroup, Field, Form, Button, Tag, Image as VanImage, Swipe, SwipeItem, Lazyload, Badge, Sidebar, SidebarItem, Collapse, CollapseItem, Tab, Tabs, Card, Search, Toast } from 'vant';
 
 createApp(App)
     .use(Swipe).use(SwipeItem).use(Lazyload, {
@@ -20,5 +20,5 @@ createApp(App)
     }).use(Badge).use(Sidebar).use(SidebarItem).use(Collapse).use(CollapseItem)
     .use(Tab).use(Tabs).use(Card).use(Search).use(Toast).use(VanImage).use(Button)
     .use(Tag).use(Form).use(Field).use(Checkbox).use(CheckboxGroup).use(SwipeCell)
-    .use(SubmitBar).use(Stepper)
+    .use(SubmitBar).use(Stepper).use(Icon)
     .use(store).use(router).mount('#app')

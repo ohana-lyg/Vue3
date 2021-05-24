@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-29 21:29:19
- * @LastEditTime: 2021-05-19 20:17:20
+ * @LastEditTime: 2021-05-24 22:05:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\views\profile\Profile.vue
@@ -11,6 +11,39 @@
         <nav-bar>
             <template v-slot:default>个人中心</template>
         </nav-bar>
+        <div class="user-box">
+            <div class="user-info">
+                <div class="info">
+                    <img src="@/assets/images/user.png" alt="">
+                    <div class="user-desc">
+                        <span>昵称：就这?</span>
+                        <span>个性签名：距离成功只差一步之遥</span>
+                    </div>
+                </div>
+            </div>
+            <ul>
+                <li class="van-hairline-bottom">
+                    <span>我的收藏</span>
+                    <van-icon name="arrow" />
+                </li>
+                <li class="van-hairline-bottom">
+                    <span>我的订单</span>
+                    <van-icon name="arrow" />
+                </li>
+                <li class="van-hairline-bottom">
+                    <span>账号管理</span>
+                    <van-icon name="arrow" />
+                </li>
+                <li class="van-hairline-bottom">
+                    <span>地址管理</span>
+                    <van-icon name="arrow" />
+                </li>
+                <li class="van-hairline-bottom">
+                    <span>关于我们</span>
+                    <van-icon name="arrow" />
+                </li>
+            </ul>
+        </div>
         <div class="logout">
             <van-button @click="tologout" round block color="#44BA80">退出登录</van-button>
         </div>

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-26 16:34:51
- * @LastEditTime: 2021-05-19 20:34:21
+ * @LastEditTime: 2021-05-27 21:27:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\router\index.js
@@ -14,6 +14,8 @@ const Home = () => import( '../views/home/Home');
 const Category = () => import( '../views/category/Category');
 const Detail = () => import( '../views/detail/Detail');
 const Profile = () => import( '../views/profile/Profile');
+const Address = () => import( '../views/profile/Address');
+const AddressEdit = () => import( '../views/profile/AddressEdit');
 const Register = () => import( '../views/profile/Register');
 const Login = () => import( '../views/profile/Login')
 const ShopCart = () => import( '../views/shopcart/ShopCart');
@@ -57,6 +59,24 @@ const routes = [
     component: Profile,
     meta: {
       title:'图书商城-个人中心',
+      isAuthorconfirm: true
+    }
+  },
+  {
+    path: '/address',
+    name: 'Address',
+    component: Address,
+    meta: {
+      title:'图书商城-地址管理',
+      isAuthorconfirm: true
+    }
+  },
+  {
+    path: '/addressedit',
+    name: 'AddressEdit',
+    component: AddressEdit,
+    meta: {
+      title:'图书商城-地址编辑',
       isAuthorconfirm: true
     }
   },

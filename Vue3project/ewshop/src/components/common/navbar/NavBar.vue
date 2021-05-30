@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-30 19:48:40
- * @LastEditTime: 2021-05-12 20:09:55
+ * @LastEditTime: 2021-05-30 21:40:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\components\common\navbar\NavBar.vue

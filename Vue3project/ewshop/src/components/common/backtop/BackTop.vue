@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-05 21:09:18
- * @LastEditTime: 2021-05-05 21:35:07
+ * @LastEditTime: 2021-05-30 21:44:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ewshop\src\components\common\backtop\BackTop.vue
@@ -14,14 +14,14 @@
 
 <script>
 export default {
-    name: "BackTop",
-    setup(props, { emit }) {
-        return {
-            backtop: () => {
-                emit('BTop');
-            }
-        }
+  name: "BackTop",
+  setup(props, { emit }) {
+    return {
+      backtop: () => {
+        emit('BTop');
+      }
     }
+  }
 }
 </script>
 

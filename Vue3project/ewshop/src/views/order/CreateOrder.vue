@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-30 21:18:10
- * @LastEditTime: 2021-06-01 22:45:50
+ * @LastEditTime: 2021-06-02 21:38:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ewshop\src\views\order\CreateOrder.vue
@@ -138,6 +138,7 @@ export default {
       bottom: 0;
       left: 0;
       height: 2px;
+      background: -webkit-repeating-linear-gradient();
       background: -webkit-repeating-linear-gradient();
     }
   }

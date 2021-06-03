@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-30 21:18:10
- * @LastEditTime: 2021-06-02 21:38:11
+ * @LastEditTime: 2021-06-03 17:44:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ewshop\src\views\order\CreateOrder.vue
@@ -138,10 +138,82 @@ export default {
       bottom: 0;
       left: 0;
       height: 2px;
-      background: -webkit-repeating-linear-gradient();
-      background: -webkit-repeating-linear-gradient();
+      background: -webkit-repeating-linear-gradient(135deg,#ff6c6c 0,#ff6c6c 20%,transparent 0,transparent 25%,#1989fa 0,#1989fa 20%,transparent 0,transparent 25%);
+      background: repeating-linear-gradient(-45deg,#ff6c6c 0,#ff6c6c 20%,transparent 0,transparent 25%,#1989fa 0,#1989fa 20%,transparent 0,transparent 25%);
+      background-size: 80px;
+      content: '';
     }
   }
+  .good {
+    margin-bottom: 120px;
+  }
+  .good-item {
+    display: flex;
+    padding: 10px;
+    background: #fff;
+    .good-img {
+      img {
+        width: 100px;
+        height: auto;
+      }
+    }
+    .good-desc {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 20px;
+      .good-title {
+        display: flex;
+        justify-content: space-between;
+      }
+      .good-btn {
+        display: flex;
+        justify-content: space-between;
+        .price {
+          font-size: 16px;
+          color: red;
+          line-height: 28px;
+        }
+        .van-icon-delete {
+          font-size: 20px;
+          margin-top: 4px;
+        }
+      }
+    }
+  }
+  .pay-wrap {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    padding: 10px 0;
+    padding-bottom: 50px;
+    border-top: 1px solid #e9e9e9;
+    >div {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 5%;
+      margin: 10px 0;
+      font-size: 14px;
+      span:nth-child(2) {
+        color: red;
+        font-size: 18px;
+      }
+    }
+    .pay-btn {
+      position: fixed;
+      bottom: 7px;
+      right: 0;
+      left: 0;
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
+}
+.submit-all {
+  margin-bottom: 50px;
+  z-index: 9 !important;
 }
 
 </style>

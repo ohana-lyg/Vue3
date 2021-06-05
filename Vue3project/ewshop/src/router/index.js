@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-26 16:34:51
- * @LastEditTime: 2021-05-27 21:27:35
+ * @LastEditTime: 2021-06-05 13:43:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Vue3project\ewshop\src\router\index.js
@@ -19,6 +19,7 @@ const AddressEdit = () => import( '../views/profile/AddressEdit');
 const Register = () => import( '../views/profile/Register');
 const Login = () => import( '../views/profile/Login')
 const ShopCart = () => import( '../views/shopcart/ShopCart');
+const CreateOrder = () => import( '../views/order/CreateOrder');
 
 const routes = [
   {
@@ -102,6 +103,15 @@ const routes = [
     component: ShopCart,
     meta: {
       title:'图书商城-购物车',
+      isAuthorconfirm: true
+    }
+  },
+  {
+    path: '/createorder',
+    name: 'CreateOrder',
+    component: CreateOrder,
+    meta: {
+      title:'图书商城-订单预览',
       isAuthorconfirm: true
     }
   },

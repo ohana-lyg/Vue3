@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-30 21:18:10
- * @LastEditTime: 2021-06-03 17:44:48
+ * @LastEditTime: 2021-06-05 14:13:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ewshop\src\views\order\CreateOrder.vue
@@ -15,8 +15,8 @@
     </nav-bar>
     <div class="address-wrap">
       <div class="name" @click="goTo">
-        <span>姓名</span>
-        <span>电话</span>
+        <span>{{address.name}}</span>
+        <span>{{address.phone}}</span>
       </div>
       <div class="address">
         详细地址信息
@@ -69,8 +69,8 @@
 <script>
 import NavBar from '../../components/common/navbar/NavBar';
 import { Toast } from 'vant';
-import { useRouter, useRoute } from 'vue-router';
-import { getOrderPreview, CreateOrder, PayOrder, Orderstatus } from '../../network/order';
+import { useRouter, /* useRoute */ } from 'vue-router';
+import { getOrderPreview, /* CreateOrder, PayOrder, Orderstatus */ } from '../../network/order';
 import { onMounted, reactive, toRefs } from 'vue';
 export default {
   components: {
@@ -78,13 +78,31 @@ export default {
   },
   setup() {
     const router = useRouter();
-    const route = useRoute();
+    // const route = useRoute();
     const state = reactive({
-      
+      cartlist: [],
+      address: {}
     })
 
-    onMounted(() => {
+    const init = () => {
+      Toast.loading({message:'加载中...', forbidClick: true});
 
+      getOrderPreview().then(res => {
+        // console.log(res);
+        let address = res.address.filter(n => n.is_default == '1');
+        if (address.length == 0) {
+          state.address = {
+            address: '还没有设置默认地址，请选择或填写地址信息'
+          }
+        }
+        else {
+          state.address = address[0];
+        }
+      })
+    }
+
+    onMounted(() => {
+      init()
     })
 
     const goTo = () => {

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-30 21:18:10
- * @LastEditTime: 2021-06-05 14:13:49
+ * @LastEditTime: 2021-06-07 20:36:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ewshop\src\views\order\CreateOrder.vue
@@ -14,32 +14,32 @@
       </template>
     </nav-bar>
     <div class="address-wrap">
-      <div class="name" @click="goTo">
+      <div class="name" >
         <span>{{address.name}}</span>
         <span>{{address.phone}}</span>
       </div>
       <div class="address">
-        详细地址信息
+        {{address.province}} {{address.city}} {{address.county}} {{address.address}}
       </div>
-      <van-icon class="arrow" name="arrow" />
+      <van-icon class="arrow" name="arrow" @click="goTo" />
     </div>
     <div class="good">
-      <div class="good-item">
-        <div class="good-img"><img src="~assets/images/22.png" alt=""></div>
+      <div class="good-item" v-for="(item, index) in cartlist" :key="index">
+        <div class="good-img"><img v-lazy="item.goods.cover_url" alt=""></div>
         <div class="good-desc">
           <div class="good-title">
-            <span>计算机网络</span>
-            <span>x100</span>
+            <span>{{item.goods.title}}</span>
+            <span>x{{item.num}}</span>
           </div>
           <div class="good-btn">
-            <div class="price">￥66</div>
+            <div class="price"><small>￥</small>{{item.goods.price + '.00'}}</div>
           </div>
         </div>
       </div>
     </div>
     <van-submit-bar
       class="submit-all"
-      :price="3050"
+      :price="total * 100"
       button-text="生成订单"
       @submit="handleCreateOrder"
     >
@@ -49,7 +49,7 @@
     <van-popup
       closeable
       close-on-click-overlay="false"
-      :show="false"
+      v-model:show="ShowPay"
       position="bottom"
       :style="{ height: '30%' }"
       @close="close"
@@ -70,8 +70,9 @@
 import NavBar from '../../components/common/navbar/NavBar';
 import { Toast } from 'vant';
 import { useRouter, /* useRoute */ } from 'vue-router';
-import { getOrderPreview, /* CreateOrder, PayOrder, Orderstatus */ } from '../../network/order';
-import { onMounted, reactive, toRefs } from 'vue';
+import { useStore } from 'vuex';
+import { getOrderPreview, CreateOrder,/* PayOrder, Orderstatus */ } from '../../network/order';
+import { computed, onMounted, reactive, toRefs } from 'vue';
 export default {
   components: {
     NavBar,
@@ -79,9 +80,12 @@ export default {
   setup() {
     const router = useRouter();
     // const route = useRoute();
+    const store = useStore();
     const state = reactive({
       cartlist: [],
-      address: {}
+      address: {},
+      ShowPay: false,
+      orderNo: ''
     })
 
     const init = () => {
@@ -98,11 +102,16 @@ export default {
         else {
           state.address = address[0];
         }
+
+        state.cartlist = res.carts;
+
+        Toast.clear();
+
       })
     }
 
     onMounted(() => {
-      init()
+      init();
     })
 
     const goTo = () => {
@@ -110,18 +119,41 @@ export default {
     }
 
     const handleCreateOrder = () => {
-      
+      const params = {
+        address_id: state.address.id,
+      }
+
+      //创建订单
+      CreateOrder(params).then(res => {
+        Toast('创建订单成功');
+        store.dispatch('updateCart');
+        state.ShowPay = true;
+        //订单ID
+        console.log(res.id);   
+        state.orderNo = res.id;
+      })
+
     }
 
     const close = () => {
       
     }
 
+    const total = computed(() => {
+      let sum = 0;
+
+      state.cartlist.forEach(item => {
+        sum += parseInt(item.num) * parseFloat(item.goods.price);
+      })
+      return sum;
+    })
+
     return {
       ...toRefs(state),
       goTo,
       handleCreateOrder,
-      close
+      close,
+      total
     }
   }
 }
